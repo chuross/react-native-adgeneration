@@ -12,12 +12,18 @@ const RNAdGenerationBanner = requireNativeComponent('RNAdGenerationBanner');
 export default class AdGenerationBanner extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      bannerWidth: 0,
+      bannerHeight: 0,
+    };
   }
 
   componentDidMount() {
     // iOS側のpropsがcomponentDidMountよりも後に呼ばれるので遅延させる
     setTimeout(() => this.load());
+  }
+
+  componentWillMount() {
   }
 
   render() {
@@ -51,9 +57,13 @@ AdGenerationBanner.propTypes = {
 
   locationId: PropTypes.string,
 
-  // sp|rect|large|tablet
+  // sp|rect|large|tablet|free
   bannerType: PropTypes.string,
-  
+
+  // require as bannerType:free
+  bannerWidth: PropTypes.number,
+  bannerHeight: PropTypes.number,
+
   // layout measured event
   // (width, height)
   onMeasure: PropTypes.func,
